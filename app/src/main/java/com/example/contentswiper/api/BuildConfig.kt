@@ -1,0 +1,8 @@
+package com.example.contentswiper.api
+
+/**
+ * BuildConfig class to store API keys and other configuration.
+ */
+object BuildConfig {
+    const val OPENAI_API_KEY = "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"
+} 

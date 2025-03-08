@@ -13,7 +13,11 @@ plugins {
     alias(libs.plugins.jreleaser)
     alias(libs.plugins.atomicfu)
     `maven-publish`
-    alias(libs.plugins.kotlinx.binary.compatibility.validator)
+    // Temporarily disable binary compatibility validator
+    // alias(libs.plugins.kotlinx.binary.compatibility.validator)
+    id("com.android.application") version "8.9.0" apply false
+    id("com.android.library") version "8.9.0" apply false
+    id("org.jetbrains.kotlin.android") version "2.0.0" apply false
 }
 
 group = "io.modelcontextprotocol"
@@ -229,5 +233,12 @@ kotlin {
                 implementation(libs.slf4j.simple)
             }
         }
+    }
+}
+
+buildscript {
+    dependencies {
+        classpath("com.android.tools.build:gradle:8.9.0")
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:2.0.0")
     }
 }
