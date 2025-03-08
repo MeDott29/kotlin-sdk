@@ -1,3 +1,6 @@
+## env ##
+.env
+
 .gradle
 build/
 !gradle/wrapper/gradle-wrapper.jar
@@ -48,5 +51,3 @@ bin/
 node_modules
 dist
 
-## env ##
-.env
