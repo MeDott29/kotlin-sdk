@@ -4,6 +4,11 @@ plugins {
     id("kotlin-kapt")
 }
 
+// Function to safely get environment variables with a default value
+fun getEnvOrDefault(key: String, defaultValue: String): String {
+    return System.getenv(key) ?: defaultValue
+}
+
 android {
     namespace = "com.example.contentswiper"
     compileSdk = 34
@@ -16,6 +21,9 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        
+        // Add API key from environment variable or use empty string as default
+        buildConfigField("String", "OPENAI_API_KEY", "\"${getEnvOrDefault("OPENAI_API_KEY", "")}\"")
     }
 
     buildTypes {
@@ -30,6 +38,7 @@ android {
     
     buildFeatures {
         viewBinding = true
+        buildConfig = true // Enable BuildConfig generation
     }
     
     compileOptions {

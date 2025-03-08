@@ -1,8 +1,18 @@
 package com.example.contentswiper.api
 
 /**
- * BuildConfig class to store API keys and other configuration.
+ * API configuration class to safely access API keys.
  */
-object BuildConfig {
-    const val OPENAI_API_KEY = "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"
+object ApiConfig {
+    // Method to get API key from environment or BuildConfig
+    fun getApiKey(): String {
+        // First try to get from system environment
+        val envKey = System.getenv("OPENAI_API_KEY")
+        if (!envKey.isNullOrEmpty()) {
+            return envKey
+        }
+        
+        // Fallback to BuildConfig (which should be populated during build)
+        return com.example.contentswiper.BuildConfig.OPENAI_API_KEY
+    }
 } 

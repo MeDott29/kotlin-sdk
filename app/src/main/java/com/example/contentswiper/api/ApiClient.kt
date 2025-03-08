@@ -12,11 +12,10 @@ import java.util.concurrent.TimeUnit
  */
 object ApiClient {
     private const val BASE_URL = "https://api.openai.com/"
-    private const val OPENAI_API_KEY = "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"
     
     private val authInterceptor = Interceptor { chain ->
         val request = chain.request().newBuilder()
-            .addHeader("Authorization", "Bearer $OPENAI_API_KEY")
+            .addHeader("Authorization", "Bearer ${ApiConfig.getApiKey()}")
             .build()
         chain.proceed(request)
     }
