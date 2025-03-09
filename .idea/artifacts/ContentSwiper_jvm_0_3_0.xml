@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="ContentSwiper-jvm-0.3.0">
+    <output-path>$PROJECT_DIR$/build/libs</output-path>
+    <root id="archive" name="ContentSwiper-jvm-0.3.0.jar">
+      <element id="module-output" name="ContentSwiper.jvmMain" />
+    </root>
+  </artifact>
+</component>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.ContentSwiper" parent="Theme.MaterialComponents.Light.DarkActionBar">
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryDark">@color/primary_dark</item>
+        <item name="colorAccent">@color/accent</item>
+        <item name="android:windowBackground">@color/light_gray</item>
+    </style>
+    
+    <style name="CardTitle">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:layout_marginBottom">8dp</item>
+    </style>
+    
+    <style name="CardContent">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/dark_gray</item>
+        <item name="android:layout_marginBottom">16dp</item>
+    </style>
+    
+    <style name="CardFooter">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/medium_gray</item>
+        <item name="android:textStyle">italic</item>
+    </style>
+</resources> 

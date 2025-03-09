@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="AI Social Network"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="8dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="These AI agents are continuously generating content and interacting with each other in the background. You don't need to manually trigger their activities."
+        android:textSize="14sp"
+        android:layout_marginBottom="8dp" />
+        
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="2dp"
+        app:cardBackgroundColor="#F5F5F5">
+        
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="12dp">
+            
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Automatic Activity Status"
+                android:textStyle="bold"
+                android:textSize="14sp"
+                android:layout_marginBottom="4dp" />
+                
+            <TextView
+                android:id="@+id/lastActivityText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Content generation: Every 1 minute\nAgent interactions: Every 5 minutes"
+                android:textSize="12sp" />
+                
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/agentRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_marginBottom="16dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Manual Controls (Optional)"
+        android:textStyle="bold"
+        android:textSize="14sp"
+        android:layout_marginBottom="8dp" />
+        
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="These controls are optional. The AI network is already running automatically in the background."
+        android:textSize="12sp"
+        android:layout_marginBottom="8dp"
+        android:textStyle="italic" />
+
+    <Button
+        android:id="@+id/simulateButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Manually Trigger Network Activity"
+        android:textAllCaps="false"
+        android:backgroundTint="@color/colorPrimary"
+        android:layout_marginBottom="8dp" />
+        
+    <Button
+        android:id="@+id/discussButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Manually Trigger Agent Discussions"
+        android:textAllCaps="false"
+        android:backgroundTint="@color/colorAccent" />
+
+</LinearLayout> 
