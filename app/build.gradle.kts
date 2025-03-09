@@ -4,9 +4,59 @@ plugins {
     id("kotlin-kapt")
 }
 
+import java.io.FileInputStream
+import java.util.Properties
+
 // Function to safely get environment variables with a default value
 fun getEnvOrDefault(key: String, defaultValue: String): String {
-    return System.getenv(key) ?: defaultValue
+    // First try to get from system environment
+    val envValue = System.getenv(key)
+    if (!envValue.isNullOrEmpty()) {
+        println("Found $key in environment variables (length: ${envValue.length})")
+        return envValue
+    } else {
+        println("No $key found in environment variables")
+    }
+    
+    // Then try to load from .env file
+    val envFile = rootProject.file(".env")
+    if (envFile.exists()) {
+        println(".env file exists at: ${envFile.absolutePath}")
+        try {
+            val properties = Properties()
+            FileInputStream(envFile).use { stream ->
+                properties.load(stream)
+            }
+            val propValue = properties.getProperty(key)
+            if (!propValue.isNullOrEmpty()) {
+                println("Found $key in .env file (length: ${propValue.length})")
+                return propValue
+            } else {
+                println("No $key found in .env file or it's empty")
+            }
+        } catch (e: Exception) {
+            println("Error reading .env file: ${e.message}")
+        }
+    } else {
+        println(".env file does not exist at: ${envFile.absolutePath}")
+    }
+    
+    // Fallback to default
+    println("Using default value for $key")
+    return defaultValue
+}
+
+// Function to read the .env file content for debugging
+fun readEnvFileContent(): String {
+    val envFile = rootProject.file(".env")
+    if (envFile.exists()) {
+        try {
+            return envFile.readText()
+        } catch (e: Exception) {
+            return "Error reading .env file: ${e.message}"
+        }
+    }
+    return ".env file does not exist"
 }
 
 android {
@@ -22,8 +72,28 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         
-        // Add API key from environment variable or use empty string as default
-        buildConfigField("String", "OPENAI_API_KEY", "\"${getEnvOrDefault("OPENAI_API_KEY", "")}\"")
+        // Room schema export location
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments += mapOf(
+                    "room.schemaLocation" to "$projectDir/schemas",
+                    "room.incremental" to "true"
+                )
+            }
+        }
+        
+        // Print .env file content for debugging
+        println("==== .env file content ====")
+        println(readEnvFileContent())
+        println("==========================")
+        
+        // Add API key from environment variable or .env file
+        val apiKey = getEnvOrDefault("OPENAI_API_KEY", "")
+        buildConfigField("String", "OPENAI_API_KEY", "\"$apiKey\"")
+        
+        // Log the API key being used (first 5 chars only for security)
+        val keyPreview = if (apiKey.length > 5) apiKey.substring(0, 5) + "..." else "not found"
+        println("Using API key: $keyPreview")
     }
 
     buildTypes {
@@ -64,11 +134,6 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0")
     implementation("androidx.activity:activity-ktx:1.8.2")
     
-    // Retrofit for API calls
-    implementation("com.squareup.retrofit2:retrofit:2.9.0")
-    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
-    implementation("com.squareup.okhttp3:logging-interceptor:4.11.0")
-    
     // JSON parsing
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.0")
     implementation("com.google.code.gson:gson:2.10.1")
@@ -86,6 +151,9 @@ dependencies {
     
     // Glide for image loading
     implementation("com.github.bumptech.glide:glide:4.16.0")
+    
+    // OkHttp for network requests
+    implementation("com.squareup.okhttp3:okhttp:4.12.0")
     
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")

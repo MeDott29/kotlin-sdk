@@ -25,6 +25,13 @@ class UserPreferenceRepository(private val userPreferenceDao: UserPreferenceDao)
         userPreferenceDao.insertPreference(preference)
     }
     
+    /**
+     * Alias for insertPreference to maintain API consistency.
+     */
+    suspend fun insertUserPreference(preference: UserPreference) {
+        insertPreference(preference)
+    }
+    
     suspend fun updatePreference(preference: UserPreference) {
         userPreferenceDao.updatePreference(preference)
     }
@@ -43,5 +50,33 @@ class UserPreferenceRepository(private val userPreferenceDao: UserPreferenceDao)
     
     suspend fun getDislikedContentCount(userId: String): Int {
         return userPreferenceDao.getDislikedContentCount(userId)
+    }
+    
+    /**
+     * Gets all preferences for a specific content item.
+     */
+    fun getContentPreferences(contentId: String): Flow<List<UserPreference>> {
+        return userPreferenceDao.getContentPreferences(contentId)
+    }
+    
+    /**
+     * Gets the number of likes for a specific content item.
+     */
+    suspend fun getContentLikeCount(contentId: String): Int {
+        return userPreferenceDao.getContentLikeCount(contentId)
+    }
+    
+    /**
+     * Gets the number of dislikes for a specific content item.
+     */
+    suspend fun getContentDislikeCount(contentId: String): Int {
+        return userPreferenceDao.getContentDislikeCount(contentId)
+    }
+    
+    /**
+     * Gets the most liked content IDs.
+     */
+    suspend fun getMostLikedContentIds(limit: Int): List<String> {
+        return userPreferenceDao.getMostLikedContentIds(limit)
     }
 } 

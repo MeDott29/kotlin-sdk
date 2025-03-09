@@ -14,10 +14,45 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
-        app:layout_constraintBottom_toTopOf="@+id/instructionText"
+        app:layout_constraintBottom_toTopOf="@+id/controlsContainer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/controlsContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/instructionText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/dislikeButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="32dp"
+            android:clickable="true"
+            android:contentDescription="@string/swipe_left_to_reject"
+            android:focusable="true"
+            app:backgroundTint="@color/reject_red"
+            app:srcCompat="@android:drawable/ic_delete" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/likeButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:clickable="true"
+            android:contentDescription="@string/swipe_right_to_like"
+            android:focusable="true"
+            app:backgroundTint="@color/like_green"
+            app:srcCompat="@android:drawable/ic_input_add" />
+
+    </LinearLayout>
 
     <TextView
         android:id="@+id/instructionText"
@@ -65,5 +100,34 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@android:drawable/ic_popup_sync" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/agentButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="16dp"
+        android:clickable="true"
+        android:contentDescription="@string/view_agent_network"
+        android:focusable="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:backgroundTint="#6200EE"
+        app:srcCompat="@android:drawable/ic_menu_myplaces"
+        android:alpha="0.6" />
+
+    <TextView
+        android:id="@+id/aiStatusText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="AI network active"
+        android:textSize="12sp"
+        android:textStyle="italic"
+        android:textColor="#6200EE"
+        android:alpha="0.7"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout> 

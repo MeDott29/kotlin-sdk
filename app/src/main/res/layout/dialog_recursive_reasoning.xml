@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Enter seed concepts for recursive graph reasoning:"
+        android:textSize="16sp"
+        android:layout_marginBottom="8dp" />
+
+    <EditText
+        android:id="@+id/seed_concepts_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="e.g., artificial intelligence, sustainability, creativity"
+        android:inputType="text"
+        android:minHeight="48dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="The system will use these concepts as starting points to recursively expand a knowledge graph and generate content that bridges different domains of knowledge."
+        android:textSize="14sp"
+        android:textStyle="italic"
+        android:layout_marginTop="8dp" />
+
+</LinearLayout> 

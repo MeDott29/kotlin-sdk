@@ -40,4 +40,28 @@ interface UserPreferenceDao {
     
     @Query("SELECT COUNT(*) FROM user_preferences WHERE userId = :userId AND isLiked = 0")
     suspend fun getDislikedContentCount(userId: String): Int
+    
+    /**
+     * Gets all preferences for a specific content item.
+     */
+    @Query("SELECT * FROM user_preferences WHERE contentId = :contentId ORDER BY timestamp DESC")
+    fun getContentPreferences(contentId: String): Flow<List<UserPreference>>
+    
+    /**
+     * Gets the number of likes for a specific content item.
+     */
+    @Query("SELECT COUNT(*) FROM user_preferences WHERE contentId = :contentId AND isLiked = 1")
+    suspend fun getContentLikeCount(contentId: String): Int
+    
+    /**
+     * Gets the number of dislikes for a specific content item.
+     */
+    @Query("SELECT COUNT(*) FROM user_preferences WHERE contentId = :contentId AND isLiked = 0")
+    suspend fun getContentDislikeCount(contentId: String): Int
+    
+    /**
+     * Gets the most liked content IDs.
+     */
+    @Query("SELECT contentId FROM user_preferences WHERE isLiked = 1 GROUP BY contentId ORDER BY COUNT(*) DESC LIMIT :limit")
+    suspend fun getMostLikedContentIds(limit: Int): List<String>
 } 
